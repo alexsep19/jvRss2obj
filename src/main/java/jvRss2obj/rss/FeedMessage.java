@@ -9,8 +9,17 @@ public class FeedMessage {
 	  String author;
 	  String guid;
 	  Date pubDate;
+	  String item;
 	  
-	  public Date getPubDate() {
+	  public String getItem() {
+		return item;
+	}
+
+	public void setItem(String item) {
+		this.item = item;
+	}
+
+	public Date getPubDate() {
 		return pubDate;
 	  }
 

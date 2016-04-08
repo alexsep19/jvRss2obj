@@ -52,6 +52,7 @@ public class LostFilmParser {
 	      String author = "";
 	      Date pubdate = null;
 	      Date itemPubDate = null;
+	      String curItem = "";
 	      String guid = "";
 
 	      // First create a new XMLInputFactory
@@ -105,6 +106,7 @@ public class LostFilmParser {
 	        	if (needItems != null){
 	        		for(int i = 0; i < needItems.size(); i++){
 	        		  if (title.indexOf(needItems.get(i)) >= 0){
+	        			curItem = needItems.get(i);
 	        			isFind = true;
 	        			needItems.remove(i);
 	        			break;
@@ -119,6 +121,7 @@ public class LostFilmParser {
 	            message.setLink(link);
 	            message.setTitle(title);
 	            message.setPubDate(itemPubDate);
+	            message.setItem(curItem);
 	            feed.getMessages().add(message);
 	            event = eventReader.nextEvent();
 	            continue;

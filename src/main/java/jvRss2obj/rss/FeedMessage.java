@@ -9,16 +9,34 @@ public class FeedMessage {
 	  String author;
 	  String guid;
 	  Date pubDate;
-	  String item;
+//	  String item;
+//	  Date pubSaved;
+	  Integer itemId;
 	  
-	  public String getItem() {
-		return item;
+    public Integer getItemId() {
+		return itemId;
 	}
 
-	public void setItem(String item) {
-		this.item = item;
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
 	}
 
+	//	  public Date getPubSaved() {
+//		return pubSaved;
+//	}
+//
+//	public void setPubSaved(Date pubSaved) {
+//		this.pubSaved = pubSaved;
+//	}
+//
+//	public String getItem() {
+//		return item;
+//	}
+//
+//	public void setItem(String item) {
+//		this.item = item;
+//	}
+//
 	public Date getPubDate() {
 		return pubDate;
 	  }

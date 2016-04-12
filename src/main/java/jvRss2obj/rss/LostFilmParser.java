@@ -28,12 +28,12 @@ public class LostFilmParser {
 	  static final String GUID = "guid";
 
 	  final URL url;
-	  ArrayList<String> needItems;
+//	  ArrayList<Object> needItems;
 
-	public LostFilmParser(String feedUrl, ArrayList<String> items) {
+	public LostFilmParser(String feedUrl/*, ArrayList<Object> items*/) {
 	    try {
 	      this.url = new URL(feedUrl);
-	      needItems = items;
+//	      needItems = items;
 	    } catch (MalformedURLException e) {
 	      throw new RuntimeException(e);
 	    }
@@ -52,7 +52,8 @@ public class LostFilmParser {
 	      String author = "";
 	      Date pubdate = null;
 	      Date itemPubDate = null;
-	      String curItem = "";
+//	      int curItem = 0;
+	      boolean isPub = true;
 	      String guid = "";
 
 	      // First create a new XMLInputFactory
@@ -102,18 +103,21 @@ public class LostFilmParser {
 	          }
 	        } else if (event.isEndElement()) {
 	          if (event.asEndElement().getName().getLocalPart() == (ITEM)) {
-	        	boolean isFind = false;
-	        	if (needItems != null){
-	        		for(int i = 0; i < needItems.size(); i++){
-	        		  if (title.indexOf(needItems.get(i)) >= 0){
-	        			curItem = needItems.get(i);
-	        			isFind = true;
-	        			needItems.remove(i);
-	        			break;
-	        		  }
-	        		}
-	        		if (!isFind) continue;
-	        	}
+//	        	boolean isFind = false;
+//	        	if (needItems != null){
+//	        		for(int i = 0; i < needItems.size(); i++){
+//	        		  if (title.indexOf(needItems.get(i)) >= 0){
+////	        			  titleFound(String title)
+//	        			curItem = needItems.get(i);
+//	        			isFind = true;
+//	        			needItems.remove(i);
+//	        			break;
+//	        		  }
+//	        		}
+//	        		if (!isFind) continue;
+//	        	}
+	        	Integer[] itemId = new Integer[1];
+	        	if (!titleFoundInRss(title, itemId)) continue;
 	            FeedMessage message = new FeedMessage();
 	            message.setAuthor(author);
 	            message.setDescription(procDescription(description));
@@ -121,7 +125,9 @@ public class LostFilmParser {
 	            message.setLink(link);
 	            message.setTitle(title);
 	            message.setPubDate(itemPubDate);
-	            message.setItem(curItem);
+	            message.setItemId(itemId[0]);
+//	            message.setItem(curItem);
+//	            setPublished();
 	            feed.getMessages().add(message);
 	            event = eventReader.nextEvent();
 	            continue;
@@ -172,13 +178,15 @@ public class LostFilmParser {
 		    }
 		  }
 	  
-    public ArrayList<String> getNeedItems() {
-		return needItems;
-	}
+//    public ArrayList<Integer> getNeedItems() {
+//		return needItems;
+//	}
+//
+//	public void setNeedItems(ArrayList<Integer> needItems) {
+//		this.needItems = needItems;
+//	}
 
-	public void setNeedItems(ArrayList<String> needItems) {
-		this.needItems = needItems;
-	}
-
-
+	  public boolean titleFoundInRss(String title, Integer[] itemId){
+		 return false; 
+	  }
 }
